@@ -199,6 +199,14 @@
             background-color: #770000;
         }
         
+        .btn-secondary {
+            background-color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+        
         /* Applications Page */
         .application-list {
             display: grid;
@@ -272,6 +280,40 @@
             margin-bottom: 1rem;
             border-bottom: 1px solid var(--scp-border);
             padding-bottom: 0.5rem;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid var(--scp-red);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .admin-panel h3 {
+            color: var(--scp-red);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .admin-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .admin-action-card {
+            background-color: rgba(40, 40, 40, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .admin-action-card h4 {
+            color: var(--scp-red);
+            margin-bottom: 1rem;
         }
         
         /* Contact Page */
@@ -395,7 +437,7 @@
                 justify-content: center;
             }
             
-            .departments, .application-list {
+            .departments, .application-list, .admin-actions {
                 grid-template-columns: 1fr;
             }
             
@@ -595,16 +637,30 @@
                 <div id="department-admin" class="department-content">
                     <h3>Administrator Access</h3>
                     <p>Full system access granted. Welcome, Administrator.</p>
-                    <div class="application-list">
-                        <div class="application-card">
-                            <h3>All Department Applications</h3>
-                            <p>Access all department application portals.</p>
-                            <a href="#" class="btn">Access All Portals</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>System Configuration</h3>
-                            <p>Modify system settings and user permissions.</p>
-                            <a href="#" class="btn">Access Configuration</a>
+                    
+                    <div class="admin-panel">
+                        <h3>Administrative Control Panel</h3>
+                        <div class="admin-actions">
+                            <div class="admin-action-card">
+                                <h4>User Management</h4>
+                                <p>Manage user accounts and permissions</p>
+                                <button class="btn">Access</button>
+                            </div>
+                            <div class="admin-action-card">
+                                <h4>Application Review</h4>
+                                <p>Review and process applications</p>
+                                <button class="btn">Access</button>
+                            </div>
+                            <div class="admin-action-card">
+                                <h4>System Configuration</h4>
+                                <p>Modify system settings</p>
+                                <button class="btn">Access</button>
+                            </div>
+                            <div class="admin-action-card">
+                                <h4>Access Logs</h4>
+                                <p>View system access records</p>
+                                <button class="btn">Access</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -845,28 +901,40 @@
             });
             document.getElementById('access-error').style.display = 'none';
             
-            if (username === "SAC-TS-11567-ALPHA-LIMA-OSPREY" && password === "1834872390") {
+            /* 
+            CUSTOMIZE LOGINS HERE:
+            Add your custom username/password combinations below.
+            Format: username: { password: "password", department: "department-id" }
+            
+            Example:
+            if (username === "draec-user" && password === "draec-pass") {
                 showDepartment("department-draec");
             }
-            else if (username === "SAC-TS-OSCAR-MIKE-LIMA-OSPREY" && password === "1834872391") {
+            */
+            
+            // Filler logins - REPLACE THESE WITH YOUR ACTUAL CREDENTIALS
+            if (username === "draec-user1" && password === "password1") {
+                showDepartment("department-draec");
+            }
+            else if (username === "domtf-user2" && password === "password2") {
                 showDepartment("department-domtf");
             }
-            else if (username === "SAC-R-KILO-APPOX-INDIA-SIERRA-ALPHA" && password === "1834872392") {
+            else if (username === "isd-user3" && password === "password3") {
                 showDepartment("department-isd");
             }
-            else if (username === "SAC-T-VICTOR-DELTA-LIMA-OSPREY-CHARLIE-ZULU" && password === "1834872393") {
+            else if (username === "ad-user4" && password === "password4") {
                 showDepartment("department-ad");
             }
-            else if (username === "-SAC-5-SA-P:SD-ALPHA-LIMA-SIERRA-DELTA-LIMA-OSPREY-VICTOR-ZULU" && password === "password4") {
+            else if (username === "wot-user5" && password === "password5") {
                 showDepartment("department-wot");
             }
-            else if (username === "SAC-R-APPOX-KILO-LIMA-INDIA-ALPHA" && password === "1834872395") {
+            else if (username === "ia-user6" && password === "password6") {
                 showDepartment("department-ia");
             }
-            else if (username === "SAC-SPECIAL-O-ALPHA-LIMA-SIERRA-ZULU-ALPHA-DELTA-ECHO-GAMMA-RESH-OMEGA-ALPHA-NINE-THREE-ONE" && password === "1834872396") {
+            else if (username === "seadoota-user7" && password === "password7") {
                 showDepartment("department-seadoota");
             }
-            else if (username === "SAC-T-ALPHA-OMEGA-RESH-GAMMA-ECHO-DELTA-ALPHA-ZULU-SIERRA-LIMA-ALPHA-ONE-THREE-NINE" && password === "1834872397") {
+            else if (username === "admin-user8" && password === "password8") {
                 showDepartment("department-admin");
             }
             else {

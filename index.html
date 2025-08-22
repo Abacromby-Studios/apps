@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP Foundation - Secure. Contain. Protect.</title>
+    <style>
+        :root {
+            --scp-dark: #0a0a0a;
+            --scp-red: #990000;
+            --scp-light: #f1f1f1;
+            --scp-classified: #004d00;
+            --scp-border: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--scp-dark);
+            color: var(--scp-light);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 77, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(153, 0, 0, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--scp-red);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--scp-red);
+            text-shadow: 0 0 5px rgba(153, 0, 0, 0.5);
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--scp-light);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--scp-light);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            border-bottom: 1px solid var(--scp-red);
+            color: var(--scp-red);
+        }
+        
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+        
+        .security-notice {
+            background-color: rgba(153, 0, 0, 0.2);
+            border: 1px solid var(--scp-red);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .security-notice h3 {
+            color: var(--scp-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--scp-border);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--scp-red);
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .departments {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .department-card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(153, 0, 0, 0.3);
+        }
+        
+        .department-card h3 {
+            color: var(--scp-red);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--scp-border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .department-card p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--scp-red);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #770000;
+        }
+        
+        /* Applications Page */
+        .application-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .application-card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .application-card h3 {
+            color: var(--scp-red);
+            margin-bottom: 1rem;
+        }
+        
+        /* Internal Access Page */
+        .access-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 6px;
+            padding: 2rem;
+        }
+        
+        .access-form h3 {
+            color: var(--scp-red);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 4px;
+            color: var(--scp-light);
+        }
+        
+        /* Legal Pages */
+        .legal-content {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 6px;
+            padding: 2rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .legal-content h2 {
+            color: var(--scp-red);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--scp-border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .legal-content h3 {
+            color: var(--scp-red);
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        
+        .legal-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .legal-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-top: 2px solid var(--scp-red);
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--scp-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--scp-red);
+        }
+        
+        .classification {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .departments, .application-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/attachments/1402364396822331402/1408361045151449168/site-39-main-logo.png" alt="SCP Foundation Logo">
+                <div>
+                    <div class="logo-text">SCP FOUNDATION</div>
+                    <div class="logo-subtext">Secure. Contain. Protect.</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="applications">Applications</a></li>
+                    <li><a href="#" class="nav-link" data-page="internal">Internal Access</a></li>
+                    <li><a href="#" class="nav-link" data-page="terms">Terms of Use</a></li>
+                    <li><a href="#" class="nav-link" data-page="privacy">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="security-notice">
+            <h3>SECURITY NOTICE</h3>
+            <p>This site is protected by advanced security systems. Unauthorized access attempts will be logged and may result in disciplinary action.</p>
+        </div>
+
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>SECURE. CONTAIN. PROTECT.</h1>
+                <p>The SCP Foundation is a clandestine organization responsible for locating and containing anomalous objects, entities, and phenomena. These anomalies pose a significant threat to global security by threatening either normalcy or human life.</p>
+            </div>
+
+            <h2>Departments</h2>
+            <div class="departments">
+                <div class="department-card">
+                    <h3>Facility Security Department</h3>
+                    <p>Responsible for maintaining the security of Foundation facilities and protecting contained anomalies.</p>
+                    <a href="#" class="btn apply-btn" data-form="fsd">Apply Now</a>
+                </div>
+                <div class="department-card">
+                    <h3>Scientific Research And Development</h3>
+                    <p>Conducts research on anomalous objects to better understand their properties and behaviors.</p>
+                    <a href="#" class="btn apply-btn" data-form="srad">Apply Now</a>
+                </div>
+                <div class="department-card">
+                    <h3>Internal Access</h3>
+                    <p>Authorized personnel may access additional departmental applications through the internal portal.</p>
+                    <a href="#" class="btn" data-page="internal">Access Portal</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications Page -->
+        <section id="applications" class="page">
+            <h2>Available Applications</h2>
+            <p>Select a department to begin your application process.</p>
+            
+            <div class="application-list">
+                <div class="application-card">
+                    <h3>Facility Security Department</h3>
+                    <p>Protect Foundation assets and personnel from anomalous threats.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYZC0esJiiFIDRhERcHUBGZpGY2Xw3MuamxlQLoD_0lbyvEA/viewform" class="btn" target="_blank">Apply Now</a>
+                </div>
+                <div class="application-card">
+                    <h3>Scientific Research And Development</h3>
+                    <p>Study and understand anomalies to advance Foundation knowledge.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfamw-2sAc14hihiQXvsho6UIqscNMBvwyLMJ2fv4DyyRkZXQ/viewform" class="btn" target="_blank">Apply Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internal Access Page -->
+        <section id="internal" class="page">
+            <h2>Internal Department Access</h2>
+            <p>Authorization required. Please provide your credentials to access internal department applications.</p>
+            
+            <div class="access-form">
+                <h3>Clearance Required</h3>
+                <div class="form-group">
+                    <label for="username">Security ID</label>
+                    <input type="text" id="username" placeholder="Enter your Security ID">
+                </div>
+                <div class="form-group">
+                    <label for="password">Access Code</label>
+                    <input type="password" id="password" placeholder="Enter your access code">
+                </div>
+                <button class="btn" id="login-btn">Verify Credentials</button>
+                
+                <div id="internal-departments" style="display: none; margin-top: 2rem;">
+                    <h3>Internal Departments</h3>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>Department of Mobile Task Forces</h3>
+                            <p>Specialized units responding to anomaly-related incidents.</p>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNluR2y65bps_xd5jl6YXiNb0YZYuZyCgN8mo7U1wDXxMByA/viewform" class="btn" target="_blank">Access</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>Department of Regulations and Ethics Committee</h3>
+                            <p>Ensures compliance with Foundation protocols and ethical standards.</p>
+                            <a href="#" class="btn">Access</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>Internal Security Department</h3>
+                            <p>Monitors Foundation personnel for potential security breaches.</p>
+                            <a href="#" class="btn">Access</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>Administrative Department</h3>
+                            <p>Manages Foundation resources and personnel assignments.</p>
+                            <a href="#" class="btn">Access</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>Warhead Operations Team</h3>
+                            <p>Handles nuclear and other strategic deterrents for Keter-class anomalies.</p>
+                            <a href="#" class="btn">Access</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>Intelligence Agency</h3>
+                            <p>Gathers information on potential anomalies and security threats.</p>
+                            <a href="#" class="btn">Access</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>Secure Executive Administrative Department</h3>
+                            <p>Office of The Administrator - Highest level of Foundation leadership.</p>
+                            <a href="#" class="btn">Access</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms of Use Page -->
+        <section id="terms" class="page">
+            <h2>Terms of Use Agreement</h2>
+            <p>Effective Date: June 2, 2025 | Last revised: June 2, 2025</p>
+            
+            <div class="legal-content">
+                <p>Welcome to the official website of Abacromby9 Studios ("we," "our," or "us"). These Terms of Use ("Terms") govern your use of our website located at https://applications-sci-39.abacromby9-studios.xyz/Contact (the "Site") and the services provided therein (the "Service"), including but not limited to applications for participation in Secure Containment Installation-39 (SCI-39) on the Roblox platform.</p>
+                
+                <p>By accessing or using the Site, you agree to be bound by these Terms and our Privacy Policy. If you do not agree, you must not use this Site.</p>
+                
+                <h3>I. Eligibility</h3>
+                <p>You must be at least 13 years old to access or use our Services. By using the Site, you represent and warrant that you meet this requirement and that any information you provide is accurate and truthful.</p>
+                
+                <h3>II. User Conduct</h3>
+                <p>When using our Site and Services, you agree not to:</p>
+                <ul>
+                    <li>Submit false or misleading information on any applications</li>
+                    <li>Impersonate another individual or entity</li>
+                    <li>Engage in harassment, hate speech, or any discriminatory behavior</li>
+                    <li>Attempt to gain unauthorized access to accounts, data, or systems</li>
+                    <li>Use the Site or Services for unlawful purposes</li>
+                    <li>Attempt to damage or disrupt the service, the network infrastructure of the service, or the network of the users, maintainers, developers, and contributors who use or upkeep the service</li>
+                </ul>
+                
+                <h3>III. Application Process</h3>
+                <p>Applications to SCI-32 may request personal details such as Roblox username, user ID, prior experience, and contact information. You acknowledge that we may contact former Roblox group administrators or other references listed in your application to verify your experience. Providing false information may result in disqualification.</p>
+                
+                <h3>IV. Intellectual Property</h3>
+                <p>All content on this Site, including text, graphics, logos, and software, is the property of Abacromby9 Studios or its licensors and is protected by copyright and trademark laws. You may not copy, reproduce, or distribute any content from this Site without our prior written permission.</p>
+                
+                <h3>V. Termination</h3>
+                <p>We reserve the right to terminate or suspend your access to the Site or Services at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users or the integrity of our platform.</p>
+                
+                <h3>VI. Disclaimer</h3>
+                <p>The Site and Services are provided "as is" and "as available" without warranties of any kind. We do not guarantee that the Site will be secure or available at any particular time or location, or that any errors or defects will be corrected.</p>
+                
+                <h3>VII. Limitation of Liability</h3>
+                <p>To the maximum extent permitted by law, Abacromby9 Studios shall not be liable for any indirect, incidental, or consequential damages resulting from your use of the Site or Services, even if we have been advised of the possibility of such damages.</p>
+                
+                <h3>VIII. Governing Law & Jurisdiction</h3>
+                <p>These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania. Any legal action or proceeding arising under these Terms shall be brought exclusively in the courts located in Pennsylvania.</p>
+                
+                <h3>IX. Compliance with Pennsylvania Law</h3>
+                <p>We strictly comply with all laws and regulations of the Commonwealth of Pennsylvania, without due regard to the laws of other jurisdictions.</p>
+                
+                <h3>X. Changes to These Terms</h3>
+                <p>We reserve the right to modify these Terms at any time. Material changes will be posted on this page with an updated effective date. Continued use of the Site after any changes constitutes your acceptance of the new Terms.</p>
+                
+                <h3>XI. Contact Us</h3>
+                <p>If you have any questions about these Terms, please contact us through our Contact page.</p>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Page -->
+        <section id="privacy" class="page">
+            <h2>Privacy Policy</h2>
+            <p>Created: January 2, 2024 | Last Revised: February 22, 2025</p>
+            
+            <div class="legal-content">
+                <p>Abacromby Studios ("we," "us," or "our") is committed to protecting the privacy and personal information of our users. This Privacy Policy outlines how we collect, use, disclose, and protect information through our website and services, particularly in relation to applications submitted for participation in Secure Containment Installation-39 (SCI-39) roleplay activities hosted on the Roblox platform.</p>
+                
+                <p>By accessing our website or using our services, you agree to this Privacy Policy and our Terms of Use. If you do not agree with the terms, please discontinue use of our Site and Services.</p>
+                
+                <h3>I. Definitions</h3>
+                <p>"Site" refers to our website: https://applications-sci-39.abacromby9-studios.xyz</p>
+                <p>"Service" refers to all services provided through the Site, including but not limited to the application process for roles in SCI-39 on Roblox</p>
+                <p>"Personal Information" refers to data that identifies, relates to, or could reasonably be linked to an individual user</p>
+                <p>"Non-Personal Information" refers to data that cannot be used to directly identify a user</p>
+                
+                <h3>II. Information We Collect</h3>
+                <h4>A. Information You Provide</h4>
+                <p>When submitting applications or creating profiles through our Site, you may provide us with:</p>
+                <ul>
+                    <li>Roblox username, user ID, and profile link</li>
+                    <li>Email address</li>
+                    <li>Time zone</li>
+                    <li>Prior experience relevant to roleplay or administrative duties</li>
+                    <li>Discord username and/or discord display name and/or Discord User ID</li>
+                    <li>Other voluntary information relevant to your application</li>
+                </ul>
+                <p>We may contact prior Roblox employers, groups, or game administrators listed by you to verify your experience and determine your suitability.</p>
+                
+                <h4>B. Information Collected Automatically</h4>
+                <p>We use cookies and tracking technologies (including Google Analytics) to collect the following:</p>
+                <ul>
+                    <li>IP address</li>
+                    <li>Device type, browser type, and operating system</li>
+                    <li>Geolocation data (precise and approximate)</li>
+                    <li>Referring/exit pages and access times</li>
+                    <li>Site usage statistics (clicks, time on page, etc.)</li>
+                    <li>Age, date of birth, and profile metadata if shared through forms</li>
+                    <li>Keystrokes on applications</li>
+                    <li>Application data submitted by the user</li>
+                    <li>Email addresses associated with Google accounts</li>
+                    <li>Device information (system cores, CPU data, screen resolution, screen size, etc.)</li>
+                    <li>System information (OS, OS version, system language, system time)</li>
+                    <li>Browser capabilities (cookies, technical capabilities like workers and service workers, session storage, etc.)</li>
+                    <li>Exact and approximate location, time zone, etc.</li>
+                </ul>
+                
+                <h3>III. Use of Information</h3>
+                <h4>A. Personal Information</h4>
+                <p>We may use your Personal Information to:</p>
+                <ul>
+                    <li>Review and assess your application</li>
+                    <li>Contact you regarding your application status</li>
+                    <li>Verify your experience with prior Roblox organizations</li>
+                    <li>Respond to inquiries or support requests</li>
+                    <li>Comply with legal obligations</li>
+                </ul>
+                <p>We do not sell, rent, or trade Personal Information for marketing purposes.</p>
+                
+                <h4>B. Non-Personal Information</h4>
+                <p>Non-Personal Information is used to:</p>
+                <ul>
+                    <li>Analyze traffic and usage patterns</li>
+                    <li>Improve the user experience and platform performance</li>
+                    <li>Share aggregate data with partners, as permitted</li>
+                </ul>
+                
+                <h3>IV. Data Security</h3>
+                <p>We use commercially reasonable physical, electronic, and administrative safeguards—including encryption, firewalls, and SSL technology—to protect your data. However, no method of transmission or storage is entirely secure. By using our Site, you acknowledge and accept these risks.</p>
+                
+                <h3>V. Children's Privacy</h3>
+                <p>Our Site and Services are not intended for children under the age of 13. We do not knowingly collect information from anyone under 13. If such information is discovered, it will be deleted promptly. Please contact us if you believe we may have collected information from a child under 13.</p>
+                
+                <h3>VI. Your Rights and Choices</h3>
+                <p>Opt out of marketing communications via "unsubscribe" links</p>
+                <p>Continue to receive service-related notifications (e.g., application updates, policy changes)</p>
+                
+                <h3>VII. Third-Party Links</h3>
+                <p>Our Site may contain links to third-party websites. We are not responsible for the privacy practices or content of those external sites. Please refer to their respective privacy policies.</p>
+                
+                <h3>VIII. Governing Law & Jurisdiction</h3>
+                <p>This Privacy Policy, and any disputes arising under it, shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, without regard to conflict of law principles.</p>
+                
+                <h3>IX. Compliance with Pennsylvania Law</h3>
+                <p>Abacromby9 Studios strictly complies with all applicable privacy, consumer protection, and data collection laws of the Commonwealth of Pennsylvania, without due regard to the laws or jurisdictions of other states, regions, or countries. All data processing, record-keeping, and user protection practices are conducted in accordance with Pennsylvania state requirements.</p>
+                
+                <h3>X. Changes to This Privacy Policy</h3>
+                <p>We reserve the right to modify or update this Privacy Policy at any time. Material changes will be notified via email (if available) or through a notice on our Site at least 1 days before taking effect. Minor updates take effect immediately upon posting.</p>
+                
+                <h3>XI. Contact Us</h3>
+                <p>For questions about this Privacy Policy or your data rights, please contact us using the information on our contact page.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 SCP Foundation. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#" class="nav-link" data-page="terms">Terms of Use</a>
+                <a href="#" class="nav-link" data-page="privacy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="classification">
+            <p>CLASSIFICATION LEVEL: 3 - INTERNAL USE ONLY</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+
+        // Apply buttons
+        document.querySelectorAll('.apply-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('applications');
+                
+                // Scroll to the specific application
+                setTimeout(() => {
+                    const formType = btn.getAttribute('data-form');
+                    const applicationElement = document.querySelector(`.application-card:nth-child(${formType === 'fsd' ? 1 : 2})`);
+                    if (applicationElement) {
+                        applicationElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 100);
+            });
+        });
+
+        // Internal access login
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation (in a real scenario, this would be server-side)
+            if (username && password) {
+                document.getElementById('internal-departments').style.display = 'block';
+            } else {
+                alert('Please enter valid credentials');
+            }
+        });
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

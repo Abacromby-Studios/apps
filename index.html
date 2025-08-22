@@ -137,18 +137,27 @@
             border: 1px solid var(--scp-border);
             border-radius: 8px;
             margin-bottom: 2rem;
+            background-image: url('https://cdn.discordapp.com/attachments/1402364396822331402/1408361045151449168/site-39-main-logo.png');
+            background-size: 200px;
+            background-repeat: no-repeat;
+            background-position: center 30px;
+            padding-top: 180px;
         }
         
         .hero h1 {
             font-size: 2.5rem;
             color: var(--scp-red);
             margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 6px;
         }
         
         .departments {
@@ -316,6 +325,76 @@
             margin-bottom: 1rem;
         }
         
+        /* Admin Tables */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+        
+        .admin-table th, .admin-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--scp-border);
+        }
+        
+        .admin-table th {
+            background-color: rgba(153, 0, 0, 0.3);
+            color: var(--scp-red);
+        }
+        
+        .admin-table tr:hover {
+            background-color: rgba(50, 50, 50, 0.8);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--scp-dark);
+            border: 2px solid var(--scp-red);
+            border-radius: 8px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--scp-border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .modal-header h3 {
+            color: var(--scp-red);
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--scp-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
         /* Contact Page */
         .contact-info {
             background-color: rgba(20, 20, 20, 0.8);
@@ -449,6 +528,11 @@
             
             .footer-links {
                 justify-content: center;
+            }
+            
+            .hero {
+                padding-top: 150px;
+                background-size: 150px;
             }
         }
     </style>
@@ -644,22 +728,22 @@
                             <div class="admin-action-card">
                                 <h4>User Management</h4>
                                 <p>Manage user accounts and permissions</p>
-                                <button class="btn">Access</button>
+                                <button class="btn" id="user-management-btn">Access</button>
                             </div>
                             <div class="admin-action-card">
                                 <h4>Application Review</h4>
                                 <p>Review and process applications</p>
-                                <button class="btn">Access</button>
+                                <button class="btn" id="application-review-btn">Access</button>
                             </div>
                             <div class="admin-action-card">
                                 <h4>System Configuration</h4>
                                 <p>Modify system settings</p>
-                                <button class="btn">Access</button>
+                                <button class="btn" id="system-config-btn">Access</button>
                             </div>
                             <div class="admin-action-card">
                                 <h4>Access Logs</h4>
                                 <p>View system access records</p>
-                                <button class="btn">Access</button>
+                                <button class="btn" id="access-logs-btn">Access</button>
                             </div>
                         </div>
                     </div>
@@ -849,21 +933,205 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 SCP Foundation. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#" class="nav-link" data-page="contact">Contact</a>
-                <a href="#" class="nav-link" data-page="terms">Terms of Use</a>
-                <a href="#" class="nav-link" data-page="privacy">Privacy Policy</a>
+    <!-- Admin Modals -->
+    <div id="user-management-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>User Management</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="search-user">Search Users</label>
+                <input type="text" id="search-user" placeholder="Enter username or email">
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Department</th>
+                        <th>Access Level</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>agent_smith</td>
+                        <td>FSD</td>
+                        <td>Level 2</td>
+                        <td><button class="btn">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>dr_jones</td>
+                        <td>SRAD</td>
+                        <td>Level 3</td>
+                        <td><button class="btn">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>admin_user8</td>
+                        <td>Administration</td>
+                        <td>Level 5</td>
+                        <td><button class="btn">Edit</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 1rem;">
+                <button class="btn">Add New User</button>
+                <button class="btn btn-secondary" style="margin-left: 0.5rem;">Export Users</button>
             </div>
         </div>
-        <div class="classification">
-            <p>CLASSIFICATION LEVEL: 3 - INTERNAL USE ONLY</p>
-        </div>
-    </footer>
+    </div>
 
-    <script>
+    <div id="application-review-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Application Review</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="app-status-filter">Filter by Status</label>
+                <select id="app-status-filter">
+                    <option value="all">All Applications</option>
+                    <option value="pending">Pending Review</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Applicant</th>
+                        <th>Department</th>
+                        <th>Submitted</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>FSD</td>
+                        <td>2023-10-15</td>
+                        <td>Pending</td>
+                        <td><button class="btn">Review</button></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>SRAD</td>
+                        <td>2023-10-14</td>
+                        <td>Approved</td>
+                        <td><button class="btn">Review</button></td>
+                    </tr>
+                    <tr>
+                        <td>Robert Johnson</td>
+                        <td>DoMTF</td>
+                        <td>2023-10-13</td>
+                        <td>Rejected</td>
+                        <td><button class="btn">Review</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="system-config-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>System Configuration</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="site-title">Site Title</label>
+                <input type="text" id="site-title" value="SCP Foundation Applications">
+            </div>
+            <div class="form-group">
+                <label for="admin-email">Admin Email</label>
+                <input type="email" id="admin-email" value="admin@site-39.org">
+            </div>
+            <div class="form-group">
+                <label for="maintenance-mode">Maintenance Mode</label>
+                <input type="checkbox" id="maintenance-mode">
+            </div>
+            <div class="form-group">
+                <label for="backup-interval">Backup Interval (days)</label>
+                <input type="number" id="backup-interval" value="7" min="1" max="30">
+            </div>
+            <button class="btn">Save Configuration</button>
+            <button class="btn btn-secondary" style="margin-left: 0.5rem;">Reset to Defaults</button>
+        </div>
+    </div>
+
+    <div id="access-logs-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Access Logs</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="log-date">Filter by Date</label>
+                <input type="date" id="log-date">
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Username</th>
+                        <th>Action</th>
+                        <th>IP Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-10-15 14:32:18</td>
+                        <td>admin_user8</td>
+                        <td>Login</td>
+                        <td>192.168.1.1</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-15 13:45:22</td>
+                        <td>agent_smith</td>
+                        <td>Application Submit</td>
+                        <td>192.168.1.15</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-15 12:18:07</td>
+                        <td>dr_jones</td>
+                        <td>Profile Update</td>
+                        <td>192.168.1.23</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-15 11:05:44</td>
+                        <td>unknown</td>
+                        <td>Failed Login</td>
+                        <td>104.243.22.18</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 1rem;">
+                <button class="btn">Export Logs</button>
+                <button class="btn btn-secondary" style="margin-left: 0.5
+                    5rem;">Clear Logs</button>
+</div>
+</div>
+</div>
+
+text
+<footer>
+    <div class="footer-content">
+        <p>© 2025 SCP Foundation. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#" class="nav-link" data-page="contact">Contact</a>
+            <a href="#" class="nav-link" data-page="terms">Terms of Use</a>
+            <a href="#" class="nav-link" data-page="privacy">Privacy Policy</a>
+        </div>
+    </div>
+    <div class="classification">
+        <p>CLASSIFICATION LEVEL: 3 - INTERNAL USE ONLY</p>
+    </div>
+</footer>
+
+<script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
         // Page navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -943,6 +1211,41 @@
             }
         });
 
+        // Admin panel functionality
+        document.getElementById('user-management-btn').addEventListener('click', () => {
+            document.getElementById('user-management-modal').style.display = 'flex';
+        });
+        
+        document.getElementById('application-review-btn').addEventListener('click', () => {
+            document.getElementById('application-review-modal').style.display = 'flex';
+        });
+        
+        document.getElementById('system-config-btn').addEventListener('click', () => {
+            document.getElementById('system-config-modal').style.display = 'flex';
+        });
+        
+        document.getElementById('access-logs-btn').addEventListener('click', () => {
+            document.getElementById('access-logs-modal').style.display = 'flex';
+        });
+
+        // Close modals
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
         function showDepartment(departmentId) {
             document.getElementById(departmentId).style.display = 'block';
             
@@ -964,6 +1267,6 @@
             // Scroll to top
             window.scrollTo(0, 0);
         }
-    </script>
-</body>
-</html>
+    });
+</script>
+</body> </html>

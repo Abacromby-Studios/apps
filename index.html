@@ -254,6 +254,66 @@
             color: var(--scp-light);
         }
         
+        .access-error {
+            color: var(--scp-red);
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        /* Department-specific content */
+        .department-content {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .department-content h3 {
+            color: var(--scp-red);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--scp-border);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Contact Page */
+        .contact-info {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--scp-border);
+            border-radius: 6px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info h3 {
+            color: var(--scp-red);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--scp-border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .contact-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--scp-red);
+        }
+        
+        .contact-item h4 {
+            color: var(--scp-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-item p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-item a {
+            color: var(--scp-red);
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
         /* Legal Pages */
         .legal-content {
             background-color: rgba(20, 20, 20, 0.8);
@@ -355,7 +415,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="https://cdn.discordapp.com/attachments/1402364396822331402/1408361045151449168/site-39-main-logo.png?ex=68a975ef&is=68a8246f&hm=47c04d411e0ca0f1e523ff3a3296c4f15bb2d3fa51e9fc8c534528c65de2aabb&" alt="SCP Foundation Logo">
+                <img src="https://cdn.discordapp.com/attachments/1402364396822331402/1408361045151449168/site-39-main-logo.png" alt="SCP Foundation Logo">
                 <div>
                     <div class="logo-text">SCP FOUNDATION</div>
                     <div class="logo-subtext">Secure. Contain. Protect.</div>
@@ -366,6 +426,7 @@
                     <li><a href="#" class="nav-link" data-page="home">Home</a></li>
                     <li><a href="#" class="nav-link" data-page="applications">Applications</a></li>
                     <li><a href="#" class="nav-link" data-page="internal">Internal Access</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
                     <li><a href="#" class="nav-link" data-page="terms">Terms of Use</a></li>
                     <li><a href="#" class="nav-link" data-page="privacy">Privacy Policy</a></li>
                 </ul>
@@ -442,46 +503,145 @@
                 </div>
                 <button class="btn" id="login-btn">Verify Credentials</button>
                 
-                <div id="internal-departments" style="display: none; margin-top: 2rem;">
-                    <h3>Internal Departments</h3>
+                <div class="access-error" id="access-error">
+                    Invalid credentials. Access denied.
+                </div>
+                
+                <!-- Department-specific content areas -->
+                <div id="department-draec" class="department-content">
+                    <h3>Department of Regulations and Ethics Committee</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
                     <div class="application-list">
                         <div class="application-card">
-                            <h3>Department of Mobile Task Forces</h3>
-                            <p>Specialized units responding to anomaly-related incidents.</p>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNluR2y65bps_xd5jl6YXiNb0YZYuZyCgN8mo7U1wDXxMByA/viewform" class="btn" target="_blank">Access</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>Department of Regulations and Ethics Committee</h3>
-                            <p>Ensures compliance with Foundation protocols and ethical standards.</p>
-                            <a href="#" class="btn">Access</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>Internal Security Department</h3>
-                            <p>Monitors Foundation personnel for potential security breaches.</p>
-                            <a href="#" class="btn">Access</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>Administrative Department</h3>
-                            <p>Manages Foundation resources and personnel assignments.</p>
-                            <a href="#" class="btn">Access</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>Warhead Operations Team</h3>
-                            <p>Handles nuclear and other strategic deterrents for Keter-class anomalies.</p>
-                            <a href="#" class="btn">Access</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>Intelligence Agency</h3>
-                            <p>Gathers information on potential anomalies and security threats.</p>
-                            <a href="#" class="btn">Access</a>
-                        </div>
-                        <div class="application-card">
-                            <h3>Secure Executive Administrative Department</h3>
-                            <p>Office of The Administrator - Highest level of Foundation leadership.</p>
-                            <a href="#" class="btn">Access</a>
+                            <h3>DoRAEC Application Portal</h3>
+                            <p>Submit applications for the Department of Regulations and Ethics Committee.</p>
+                            <a href="#" class="btn">Access Application</a>
                         </div>
                     </div>
                 </div>
+                
+                <div id="department-domtf" class="department-content">
+                    <h3>Department of Mobile Task Forces</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>DoMTF Application Portal</h3>
+                            <p>Submit applications for the Department of Mobile Task Forces.</p>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNluR2y65bps_xd5jl6YXiNb0YZYuZyCgN8mo7U1wDXxMByA/viewform" class="btn" target="_blank">Access Application</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="department-isd" class="department-content">
+                    <h3>Internal Security Department</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>ISD Application Portal</h3>
+                            <p>Submit applications for the Internal Security Department.</p>
+                            <a href="#" class="btn">Access Application</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="department-ad" class="department-content">
+                    <h3>Administrative Department</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>AD Application Portal</h3>
+                            <p>Submit applications for the Administrative Department.</p>
+                            <a href="#" class="btn">Access Application</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="department-wot" class="department-content">
+                    <h3>Warhead Operations Team</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>WOT Application Portal</h3>
+                            <p>Submit applications for the Warhead Operations Team.</p>
+                            <a href="#" class="btn">Access Application</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="department-ia" class="department-content">
+                    <h3>Intelligence Agency</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>IA Application Portal</h3>
+                            <p>Submit applications for the Intelligence Agency.</p>
+                            <a href="#" class="btn">Access Application</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="department-seadoota" class="department-content">
+                    <h3>Secure Executive Administrative Department Office of The Administrator</h3>
+                    <p>Access granted. Welcome, authorized personnel.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>SEADOoTA Application Portal</h3>
+                            <p>Submit applications for the Secure Executive Administrative Department.</p>
+                            <a href="#" class="btn">Access Application</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="department-admin" class="department-content">
+                    <h3>Administrator Access</h3>
+                    <p>Full system access granted. Welcome, Administrator.</p>
+                    <div class="application-list">
+                        <div class="application-card">
+                            <h3>All Department Applications</h3>
+                            <p>Access all department application portals.</p>
+                            <a href="#" class="btn">Access All Portals</a>
+                        </div>
+                        <div class="application-card">
+                            <h3>System Configuration</h3>
+                            <p>Modify system settings and user permissions.</p>
+                            <a href="#" class="btn">Access Configuration</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page">
+            <h2>Contact Information</h2>
+            <p>For inquiries, please use the appropriate contact method below.</p>
+            
+            <div class="contact-info">
+                <h3>Department Contacts</h3>
+                
+                <div class="contact-item">
+                    <h4>Legal Inquiries</h4>
+                    <p>For questions regarding Terms of Use, Privacy Policy, or other legal documents:</p>
+                    <p><strong>Email:</strong> <a href="mailto:legal@abacromby9-studios.xyz">legal@abacromby9-studios.xyz</a></p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>Technical Support & General Inquiries</h4>
+                    <p>For technical issues with the application process or general questions:</p>
+                    <p><strong>Email:</strong> <a href="mailto:support@abacromby9-studios.xyz">support@abacromby9-studios.xyz</a></p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>Application Status Inquiries</h4>
+                    <p>For questions about your application status:</p>
+                    <p><strong>Email:</strong> <a href="mailto:applications@abacromby9-studios.xyz">applications@abacromby9-studios.xyz</a></p>
+                    <p>Please include your full name and application reference number.</p>
+                </div>
+            </div>
+            
+            <div class="security-notice">
+                <h3>NOTE</h3>
+                <p>Response times may vary based on inquiry volume. For urgent matters related to security breaches, please use the secure channels provided to authorized personnel.</p>
             </div>
         </section>
 
@@ -637,6 +797,7 @@
         <div class="footer-content">
             <p>© 2025 SCP Foundation. All rights reserved.</p>
             <div class="footer-links">
+                <a href="#" class="nav-link" data-page="contact">Contact</a>
                 <a href="#" class="nav-link" data-page="terms">Terms of Use</a>
                 <a href="#" class="nav-link" data-page="privacy">Privacy Policy</a>
             </div>
@@ -678,13 +839,50 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Simple validation (in a real scenario, this would be server-side)
-            if (username && password) {
-                document.getElementById('internal-departments').style.display = 'block';
-            } else {
-                alert('Please enter valid credentials');
+            // Hide any previously shown department content and error message
+            document.querySelectorAll('.department-content').forEach(dept => {
+                dept.style.display = 'none';
+            });
+            document.getElementById('access-error').style.display = 'none';
+            
+            if (username === "SAC-TS-11567-ALPHA-LIMA-OSPREY" && password === "1834872390") {
+                showDepartment("department-draec");
+            }
+            else if (username === "SAC-TS-OSCAR-MIKE-LIMA-OSPREY" && password === "1834872391") {
+                showDepartment("department-domtf");
+            }
+            else if (username === "SAC-R-KILO-APPOX-INDIA-SIERRA-ALPHA" && password === "1834872392") {
+                showDepartment("department-isd");
+            }
+            else if (username === "SAC-T-VICTOR-DELTA-LIMA-OSPREY-CHARLIE-ZULU" && password === "1834872393") {
+                showDepartment("department-ad");
+            }
+            else if (username === "-SAC-5-SA-P:SD-ALPHA-LIMA-SIERRA-DELTA-LIMA-OSPREY-VICTOR-ZULU" && password === "password4") {
+                showDepartment("department-wot");
+            }
+            else if (username === "SAC-R-APPOX-KILO-LIMA-INDIA-ALPHA" && password === "1834872395") {
+                showDepartment("department-ia");
+            }
+            else if (username === "SAC-SPECIAL-O-ALPHA-LIMA-SIERRA-ZULU-ALPHA-DELTA-ECHO-GAMMA-RESH-OMEGA-ALPHA-NINE-THREE-ONE" && password === "1834872396") {
+                showDepartment("department-seadoota");
+            }
+            else if (username === "SAC-T-ALPHA-OMEGA-RESH-GAMMA-ECHO-DELTA-ALPHA-ZULU-SIERRA-LIMA-ALPHA-ONE-THREE-NINE" && password === "1834872397") {
+                showDepartment("department-admin");
+            }
+            else {
+                // Show error for invalid credentials
+                document.getElementById('access-error').style.display = 'block';
             }
         });
+
+        function showDepartment(departmentId) {
+            document.getElementById(departmentId).style.display = 'block';
+            
+            // Scroll to the department content
+            setTimeout(() => {
+                document.getElementById(departmentId).scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
 
         function showPage(pageId) {
             // Hide all pages
